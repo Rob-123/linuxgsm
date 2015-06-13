@@ -1,23 +1,13 @@
 #!/bin/bash
 # LGSM fn_functions function
 # Author: Daniel Gibbs
-# Website: http://gameservermanagers.com
-# Version: 240515
+# Website: http://danielgibbs.co.uk
+# Version: 190215
 
 # Description: Defines all functions to allow download and execution of functions using fn_runfunction.
 # This function is called first before any other function. Without this file other functions would not load.
 
-fn_backup(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
 fn_check_ip(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_check_logs(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
@@ -32,11 +22,6 @@ functionfile="${FUNCNAME}"
 fn_runfunction
 }
 
-fn_check_steamuser(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
 fn_check_systemdir(){
 functionfile="${FUNCNAME}"
 fn_runfunction
@@ -47,27 +32,7 @@ functionfile="${FUNCNAME}"
 fn_runfunction
 }
 
-fn_check_ts3status(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
 fn_console(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_compress_unreal2maps(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_compress_ut99maps(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_csgofix(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
@@ -91,27 +56,8 @@ fn_details_distro(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
-fn_email(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_email_test(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
 
 fn_getopt(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_insfix(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_logs(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
@@ -134,7 +80,6 @@ fn_runfunction
 fn_restart(){
 local modulename="Restarting"
 fn_details_config
-fn_scriptlog "${servername}"
 fn_stop
 fn_start
 }
@@ -149,27 +94,17 @@ functionfile="${FUNCNAME}"
 fn_runfunction
 }
 
-fn_update_check(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_update_functions(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
 fn_update_dl(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
 
-fn_update_functions(){
+fn_validate(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
 
-fn_validate(){
+fn_update_check(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
@@ -218,11 +153,6 @@ functionfile="${FUNCNAME}"
 fn_runfunction
 }
 
-fn_install_logs(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
 fn_install_retry(){
 functionfile="${FUNCNAME}"
 fn_runfunction
@@ -249,11 +179,6 @@ fn_runfunction
 }
 
 fn_install_steamfix(){
-functionfile="${FUNCNAME}"
-fn_runfunction
-}
-
-fn_install_ts3(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }

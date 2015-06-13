@@ -1,19 +1,12 @@
 #!/bin/bash
 # LGSM fn_messages function
 # Author: Daniel Gibbs
-# Website: http://gameservermanagers.com
+# Website: http://danielgibbs.co.uk
 # Version: 260115
 
 # Description: Defines on-screen messages such as [  OK  ] and how script logs look.
 
 # Date and servicename for log files.
-fn_scriptlog(){
-    if [[ -n ${modulename} ]]; then
-        echo -e "$(date '+%b %d %H:%M:%S') ${servicename}: ${modulename}: ${1}" >> "${scriptlog}"
-    else
-        echo -e "$(date '+%b %d %H:%M:%S') ${servicename}: ${1}" >> "${scriptlog}"
-    fi
-}
 
 # [ FAIL ]
 fn_printfail(){
