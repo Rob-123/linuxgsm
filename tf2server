@@ -1,0 +1,73 @@
+#!/bin/bash
+# Tempus Manager
+# Modified from Daniel Gibbs [http://danielgibbs.co.uk]
+
+#### Variables ####
+
+# Steam login
+steamuser="anonymous"
+steampass=""
+
+# Start Variables
+defaultmap="cp_badlands"
+maxplayers="16"
+port="27015"
+sourcetvport="27020"
+clientport="27005"
+ip="0.0.0.0"
+
+#Other Vars
+updateonstart="yes"
+getoverhere="yes"
+
+# https://developer.valvesoftware.com/wiki/Command_Line_Options#Source_Dedicated_Server
+fn_parms(){
+parms="-game tf -strictportbind -ip ${ip} -port ${port} +clientport ${clientport} +tv_port ${sourcetvport} +map ${defaultmap} +servercfgfile ${servercfg} -maxplayers ${maxplayers}"
+}
+
+#### Advanced Variables ####
+
+# Steam
+appid="232250"
+
+# Server Details
+servicename="tf2-server"
+gamename="Team Fortress 2"
+engine="source"
+
+# Directories
+rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+parentdir="$(dirname "${rootdir}")"
+selfname="$(basename $0)"
+lockselfname=".${servicename}.lock"
+filesdir="${rootdir}/serverfiles"
+systemdir="${filesdir}/tf"
+executabledir="${filesdir}"
+executable="./srcds_run"
+servercfgdir="${systemdir}/cfg"
+servercfg="${servicename}.cfg"
+servercfgfullpath="${servercfgdir}/${servercfg}"
+defaultcfg="${servercfgdir}/server.cfg"
+
+
+##### Script #####
+# Do not edit
+
+fn_runfunction(){
+# Functions are downloaded and run with this function
+if [ ! -f "${rootdir}/functions/${functionfile}" ]; then
+	echo  "Unable to find function"
+fi
+source "${rootdir}/functions/${functionfile}"
+}
+
+fn_functions(){
+# Functions are defined in fn_functions.
+functionfile="${FUNCNAME}"
+fn_runfunction
+}
+
+fn_functions
+
+getopt=$1
+fn_getopt
