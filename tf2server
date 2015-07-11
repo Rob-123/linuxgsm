@@ -53,10 +53,79 @@ defaultcfg="${servercfgdir}/server.cfg"
 ##### Script #####
 # Do not edit
 
+##### Check for script updates #####
+fn_checkscriptupdate(){
+    cd "${rootdir}"
+    if [ ! -f ".tf2server_version" ]; then
+        echo -e "No current version detected.\r"
+        fn_updatescript
+    else
+        currentfile=$(<.tf2server_version)
+        latestfile=$(wget -qO- https://raw.githubusercontent.com/Rob-123/linuxgsm/master/.tf2server_version)
+
+        #Check variables have contents
+        if [ -z "${currentfile}" ]; then
+            echo -e "No current version detected.\r"
+            fn_updatescript
+            exit
+        fi
+
+        if [ -z "${latestfile}" ]; then
+            echo -e "Unable to retrieve latest version.\r"
+            exit
+        fi
+
+        #Some sanitizing
+        set -- ${currentfile}
+        currentver=$1
+        set -- ${latestfile}
+        latestver=$1
+
+        if ((${latestver} \> ${currentver})); then
+            echo "Script is out of date.\r"
+            fn_updatescript
+            exit
+        fi
+    fi
+}
+
+fn_updatescript(){
+    echo -e "Updating tf2server functions...\r"
+    cd "${rootdir}"
+    wget -q -O - https://github.com/Rob-123/linuxgsm/archive/master.zip >master.zip
+    unzip -q -o master.zip
+    rm master.zip
+
+    if [ ! -d ".functions_old" ]; then
+        mkdir .functions_old
+    fi
+
+    if [ -d "functions" ]; then
+        mv functions/* .functions_old/
+    else
+        mkdir functions
+    fi
+
+    cp -r linuxgsm-master/functions/ .
+    cp linuxgsm-master/.tf2server_version .tf2server_version
+    rm -rf linuxgsm-master
+    echo -e "Updating completed\r"
+}
+
+
+##### Run a single function #####
 fn_runfunction(){
 # Functions are downloaded and run with this function
 if [ ! -f "${rootdir}/functions/${functionfile}" ]; then
-	echo  "Unable to find function"
+    cd "${rootdir}"
+    if [ ! -d "functions" ]; then
+        mkdir functions
+    fi
+    cd functions
+    echo -e "    loading ${functionfile}...\c"
+    wget -N /dev/null https://raw.githubusercontent.com/Rob-123/linuxgsm/master/functions/${functionfile} 2>&1 | grep -F HTTP | cut -c45-
+    chmod +x "${functionfile}"
+    cd "${rootdir}"
 fi
 source "${rootdir}/functions/${functionfile}"
 }
@@ -66,6 +135,8 @@ fn_functions(){
 functionfile="${FUNCNAME}"
 fn_runfunction
 }
+
+fn_checkscriptupdate
 
 fn_functions
 
